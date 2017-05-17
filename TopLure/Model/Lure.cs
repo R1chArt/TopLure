@@ -17,6 +17,7 @@ namespace TopLure.Model
             set { pattern = value; OnPropertyChanged(); }
         }
 
+   
         private string style;
 
         public string Style
@@ -56,6 +57,20 @@ namespace TopLure.Model
             get { return urlShop; }
             set { urlShop = value; }
         }
+        private bool available;
 
+        public bool Available
+        {
+            get { return available; }
+            set { available = value; }
+        }
+
+        private int count;
+
+        public int Count
+        {
+            get { return count; }
+            set { count = value; }
+        }
     }
 }

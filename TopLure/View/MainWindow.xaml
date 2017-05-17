@@ -51,6 +51,6 @@
         </DataGrid>
         <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" Width="75" Height="27" Grid.Row="1" ToolTip="Add new lure to your data" Command="{Binding AddCommand}"/>
         <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="430,10,0,0" VerticalAlignment="Top" Width="75" Height="27" Grid.Row="1" ToolTip="Save data" Command="{Binding SaveCommand}"/>
-        <TextBox x:Name="txtAdd" MaxLines="100" HorizontalAlignment="Left" Margin="100,10,0,0" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding AddText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" Height="25" Width="320"/>
+        <!--<TextBox x:Name="txtAdd" MaxLines="100" HorizontalAlignment="Left" Margin="100,10,0,0" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding AddText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" Height="25" Width="320"/>-->
     </Grid>
 </Controls:MetroWindow>

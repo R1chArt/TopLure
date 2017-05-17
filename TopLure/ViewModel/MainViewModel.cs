@@ -33,42 +33,55 @@ namespace TopLure.ViewModel
 
         public DelegateCommand AddCommand { get; set; }
         public DelegateCommand SaveCommand { get; set; }
-
         public void AddLure()
         {
-            if (string.IsNullOrEmpty(AddText))
+            var window = new View.AddLure()
             {
-                return;
-            }
+                Title = "Adding lure..",
+            };
 
-            using (StringReader reader = new StringReader(AddText))
+            window.ShowDialog();
+            if (window.DialogResult != null && (bool)window.DialogResult)
             {
-                string line = string.Empty;
-                do
-                {
-                    line = reader.ReadLine();
-                    if (line != null)
-                    {
-                        var items = line.Count(x => x == ',');
-                        var split = line.Split(',');
-                        if (items >= 4)
-                        {
-                            Lures.Add(new Lure { Pattern = split[0], Style = split[1], Size = split[2], Rank = int.Parse(split[3]) });
-                        }
-                        else if (items >= 3)
-                        {
-                            Lures.Add(new Lure { Pattern = split[0], Style = split[1], Rank = int.Parse(split[2]) });
-                        }
-                        else if (items >= 2)
-                        {
-                            Lures.Add(new Lure { Pattern = split[0], Rank = int.Parse(split[1]) });
-                        }
-                    }
-
-                } while (line != null);
+                lures.Add(window.DataContext as Lure);
             }
-
+            
         }
+
+        //public void AddLure()
+        //{
+        //    if (string.IsNullOrEmpty(AddText))
+        //    {
+        //        return;
+        //    }
+
+        //    using (StringReader reader = new StringReader(AddText))
+        //    {
+        //        string line = string.Empty;
+        //        do
+        //        {
+        //            line = reader.ReadLine();
+        //            if (line != null)
+        //            {
+        //                var items = line.Count(x => x == ',');
+        //                var split = line.Split(',');
+        //                if (items >= 4)
+        //                {
+        //                    Lures.Add(new Lure { Pattern = split[0], Style = split[1], Size = split[2], Rank = int.Parse(split[3]) });
+        //                }
+        //                else if (items >= 3)
+        //                {
+        //                    Lures.Add(new Lure { Pattern = split[0], Style = split[1], Rank = int.Parse(split[2]) });
+        //                }
+        //                else if (items >= 2)
+        //                {
+        //                    Lures.Add(new Lure { Pattern = split[0], Rank = int.Parse(split[1]) });
+        //                }
+        //            }
+
+        //        } while (line != null);
+        //    }
+        //}
         private void GetData()
         {
             if (!File.Exists(fileName))
