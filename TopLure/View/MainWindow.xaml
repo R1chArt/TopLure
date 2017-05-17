@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TopLure"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:VM="clr-namespace:TopLure.ViewModel"
         mc:Ignorable="d"
-        Title="Top Lure" Height="350" Width="525">
+        Title="Top Lure" Height="350" Width="525"
+        d:DataContext="{d:DesignInstance VM:MainViewModel, IsDesignTimeCreatable=True}"
+        >
+    <Window.DataContext>
+        <VM:MainViewModel />
+    </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -34,6 +40,17 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>-->
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <DataGrid ItemsSource="{Binding Lures}" Margin="10,20,10,0"
+                  AutoGenerateColumns="True"
+                  Style="{StaticResource AzureDataGrid}">
+
+        </DataGrid>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" Width="75" Height="27" Grid.Row="1" ToolTip="Add new lure to your data" Command="{Binding AddCommand}"/>
+        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="430,10,0,0" VerticalAlignment="Top" Width="75" Height="27" Grid.Row="1" ToolTip="Save data" Command="{Binding SaveCommand}"/>
+        <TextBox x:Name="txtAdd" MaxLines="100" HorizontalAlignment="Left" Margin="100,10,0,0" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding AddText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" Height="25" Width="320"/>
     </Grid>
 </Controls:MetroWindow>

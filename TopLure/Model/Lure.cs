@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TopLure.Model
 {
-    public class Lure : PropertyChangedBase
+    [Serializable]
+    public class Lure : Mvvm.BindableBase
     {
         private string pattern;
 
@@ -32,14 +33,6 @@ namespace TopLure.Model
             set { size = value; OnPropertyChanged(); }
         }
 
-        private string id;
-
-        public string Id
-        {
-            get { return id; }
-            set { id = value; OnPropertyChanged(); }
-        }
-
         private int rank;
 
         public int Rank
@@ -47,6 +40,22 @@ namespace TopLure.Model
             get { return rank; }
             set { rank = value; OnPropertyChanged(); }
         }
-            
+
+        private string url;
+
+        public string Url
+        {
+            get { return url; }
+            set { url = value; }
+        }
+
+        private string urlShop;
+
+        public string UrlShop
+        {
+            get { return urlShop; }
+            set { urlShop = value; }
+        }
+
     }
 }

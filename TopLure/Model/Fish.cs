@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TopLure.Model
 {
-    public class Fish : PropertyChangedBase
+    public class Fish : Mvvm.BindableBase
     {
         private string name;
 
