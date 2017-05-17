@@ -31,5 +31,14 @@ namespace TopLure.Model
             get { return size; }
             set { size = value; }
         }
+
+        private string id;
+
+        public string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
     }
 }
