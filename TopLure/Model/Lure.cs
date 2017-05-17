@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace TopLure.Model
 {
-    public class Lure
+    public class Lure : PropertyChangedBase
     {
         private string pattern;
 
         public string Pattern
         {
             get { return pattern; }
-            set { pattern = value; }
+            set { pattern = value; OnPropertyChanged(); }
         }
 
         private string style;
@@ -21,7 +21,7 @@ namespace TopLure.Model
         public string Style
         {
             get { return style; }
-            set { style = value; }
+            set { style = value; OnPropertyChanged(); }
         }
 
         private string size;
@@ -29,7 +29,7 @@ namespace TopLure.Model
         public string Size
         {
             get { return size; }
-            set { size = value; }
+            set { size = value; OnPropertyChanged(); }
         }
 
         private string id;
@@ -37,8 +37,16 @@ namespace TopLure.Model
         public string Id
         {
             get { return id; }
-            set { id = value; }
+            set { id = value; OnPropertyChanged(); }
         }
 
+        private int rank;
+
+        public int Rank
+        {
+            get { return rank; }
+            set { rank = value; OnPropertyChanged(); }
+        }
+            
     }
 }
