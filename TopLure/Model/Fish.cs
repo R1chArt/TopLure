@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace TopLure.Model
 {
+    [Serializable]
     public class Fish : Mvvm.BindableBase
     {
         private string name;

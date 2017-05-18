@@ -79,6 +79,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\AddCatch.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\AddLure.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -91,9 +95,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Catch.cs" />
     <Compile Include="Model\Fish.cs" />
     <Compile Include="Model\Lure.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="View\AddCatch.xaml.cs">
+      <DependentUpon>AddCatch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddLure.xaml.cs">
       <DependentUpon>AddLure.xaml</DependentUpon>
     </Compile>

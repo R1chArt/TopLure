@@ -14,11 +14,13 @@ namespace TopLure.ViewModel
 {
     public class MainViewModel : Mvvm.BindableBase
     {
-        private const string fileName = @"lures.json";
+        private const string lureFileName = @"lures.json";
+        private const string catchFileName = @"catches.json";
         public MainViewModel()
         {
             GetData();
             AddCommand = new DelegateCommand(AddLure);
+            AddCatchCommand = new DelegateCommand(AddCatch);
             SaveCommand = new DelegateCommand(SaveData);
         }
 
@@ -32,13 +34,23 @@ namespace TopLure.ViewModel
 
 
         public DelegateCommand AddCommand { get; set; }
+        public DelegateCommand AddCatchCommand { get; set; }
         public DelegateCommand SaveCommand { get; set; }
+        public void AddCatch()
+        {
+            var window = new View.AddCatch();
+
+            window.ShowDialog();
+            if (window.DialogResult != null && (bool)window.DialogResult)
+            {
+                catches.Add(window.DataContext as Catch);
+            }
+
+        }
+
         public void AddLure()
         {
-            var window = new View.AddLure()
-            {
-                Title = "Adding lure..",
-            };
+            var window = new View.AddLure();
 
             window.ShowDialog();
             if (window.DialogResult != null && (bool)window.DialogResult)
@@ -84,7 +96,7 @@ namespace TopLure.ViewModel
         //}
         private void GetData()
         {
-            if (!File.Exists(fileName))
+            if (!File.Exists(lureFileName))
             {
                 InitializeBasicData();
             }
@@ -96,10 +108,19 @@ namespace TopLure.ViewModel
 
         private void LoadJsonFromFile()
         {
-            var jsonLure = JsonConvert.DeserializeObject<List<Lure>>(File.ReadAllText(fileName));
+            var jsonLure = JsonConvert.DeserializeObject<List<Lure>>(File.ReadAllText(lureFileName));
             foreach (var item in jsonLure)
             {
                 lures.Add(item);
+            }
+
+            if (File.Exists(catchFileName))
+            {
+                var jsonCatch = JsonConvert.DeserializeObject<List<Catch>>(File.ReadAllText(catchFileName));
+                foreach (var item in jsonCatch)
+                {
+                    catches.Add(item);
+                } 
             }
         }
 
@@ -115,7 +136,18 @@ namespace TopLure.ViewModel
         private void SaveData()
         {
             string json = JsonConvert.SerializeObject(Lures.ToList());
-            File.WriteAllText(fileName, json);
+            File.WriteAllText(lureFileName, json);
+
+            json = JsonConvert.SerializeObject(Catches.ToList());
+            File.WriteAllText(catchFileName, json);
+        }
+
+        private ObservableCollection<Catch> catches = new ObservableCollection<Catch>();
+
+        public ObservableCollection<Catch> Catches
+        {
+            get { return catches; }
+            set { catches = value; }
         }
 
         private ObservableCollection<Lure> lures = new ObservableCollection<Lure>();

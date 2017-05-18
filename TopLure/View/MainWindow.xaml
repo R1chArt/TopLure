@@ -7,7 +7,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:VM="clr-namespace:TopLure.ViewModel"
         mc:Ignorable="d"
-        Title="Top Lure" Height="350" Width="525"
+        Title="Top Lure" Height="450" Width="900"
         d:DataContext="{d:DesignInstance VM:MainViewModel, IsDesignTimeCreatable=True}"
         >
     <Window.DataContext>
@@ -44,13 +44,37 @@
             <RowDefinition Height="55*"/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Lures}" Margin="10,20,10,0"
+
+        <TabControl DockPanel.Dock="Bottom">
+            <TabItem Header="Lure">
+                <DataGrid ItemsSource="{Binding Lures}" Margin="10,20,10,0"
                   AutoGenerateColumns="True"
                   Style="{StaticResource AzureDataGrid}">
-
-        </DataGrid>
-        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" Width="75" Height="27" Grid.Row="1" ToolTip="Add new lure to your data" Command="{Binding AddCommand}"/>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Catches">
+                <DataGrid ItemsSource="{Binding Catches}" Margin="10,20,10,0"
+                  AutoGenerateColumns="False"
+                  Style="{StaticResource AzureDataGrid}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Path=Fish.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="Weight" Binding="{Binding Path=Fish.Weight, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="Length" Binding="{Binding Path=Fish.Length, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        <DataGridTextColumn Header="DateTime" Binding="{Binding Date, StringFormat=d}" />
+                        <DataGridTextColumn Header="Coordiante" Binding="{Binding Coordiante}" />
+                        <DataGridTextColumn Header="Location" Binding="{Binding Location}" />
+                        <DataGridTextColumn Header="Lure.Pattern" Binding="{Binding Path=Lure.Pattern}" />
+                        <DataGridTextColumn Header="Lure.Style" Binding="{Binding Path=Lure.Style}" />
+                        <DataGridTextColumn Header="Lure.Size" Binding="{Binding Path=Lure.Size}" />
+                        <DataGridTextColumn Header="Note" Binding="{Binding Note}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+      
+        <Button x:Name="btnAdd" Content="Add Lure" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" Width="75" Height="27" Grid.Row="1" ToolTip="Add new lure to your data" Command="{Binding AddCommand}"/>
         <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="430,10,0,0" VerticalAlignment="Top" Width="75" Height="27" Grid.Row="1" ToolTip="Save data" Command="{Binding SaveCommand}"/>
+        <Button x:Name="btnAddCatch" Content="Add Catch" HorizontalAlignment="Left" Margin="90,8,0,0" VerticalAlignment="Top" Width="75" Height="27" Grid.Row="1" ToolTip="Add new lure to your data" Command="{Binding AddCatchCommand}"/>
         <!--<TextBox x:Name="txtAdd" MaxLines="100" HorizontalAlignment="Left" Margin="100,10,0,0" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding AddText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" Height="25" Width="320"/>-->
     </Grid>
 </Controls:MetroWindow>
